@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: Install EC2 node servers.
+    ec2:
+      key_name: myWebServer
+      instance_type: t2.micro
+      image: ami-07b90ebed291ba819
+      region: us-east-1
+      wait: yes
+      group: default
+      count: 2
+      vpc_subnet_id: subnet-072e2050d36d560c8
+      assign_public_ip: yes
+      instance_tags:
+        Name: myAnsibleNode
